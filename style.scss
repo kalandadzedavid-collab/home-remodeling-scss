@@ -1,0 +1,185 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import "./variables";
+
+@mixin flexbox($flex, $justify, $align, $direction) {
+  display: $flex;
+  justify-content: $justify;
+  align-items: $align;
+  flex-direction: $direction;
+}
+
+@mixin button($bg_color) {
+  padding: 10px 20px;
+  color: gray;
+  border: 0;
+  background-color: $bg_color;
+}
+
+@mixin desktop {
+  @media (min-width: 900px) {
+    @content;
+  }
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  max-width: 100vw;
+  min-height: 100vh;
+}
+
+header {
+  height: 98px;
+  @include flexbox(flex, space-between, center, unset);
+  background-color: $Gray;
+  padding: 0 40px;
+
+  .left_header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    #logo {
+      width: 32px;
+    }
+
+    h1 {
+      font-size: 20px;
+      font-weight: 500;
+      width: 180px;
+    }
+  }
+  .mobile_nav {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    min-width: 50px;
+    min-height: 50px;
+
+    svg {
+      width: 30px;
+    }
+
+    #close,
+    ul {
+      display: none;
+    }
+
+    #open:hover {
+      cursor: pointer;
+    }
+
+    #close:hover {
+      cursor: pointer;
+    }
+
+    &:hover {
+      #open {
+        display: none;
+      }
+      #close {
+        display: block;
+        position: relative;
+        z-index: 1;
+      }
+      ul {
+        position: absolute;
+        display: flex;
+        gap: 20px;
+        align-items: center;
+        flex-direction: column;
+        list-style: none;
+        background-color: $Gray;
+        padding: 150px 0 500px 0;
+        top: 0;
+        height: 200px;
+        width: 100%;
+        left: 0;
+        cursor: unset;
+
+        li {
+          font-size: 20px;
+          font-weight: 600;
+        }
+
+        li:hover {
+          color: $gold;
+          cursor: pointer;
+        }
+      }
+    }
+    @include desktop() {
+      display: none;
+    }
+  }
+  .desktop_nav {
+    display: none;
+
+    ul {
+      display: flex;
+      list-style: none;
+      gap: 20px;
+      font-size: 14px;
+      color: $blacktext;
+      font-weight: 200;
+
+      li:hover {
+        color: $gold;
+        cursor: pointer;
+      }
+    }
+
+    @include desktop() {
+      display: flex;
+    }
+  }
+}
+
+main {
+  .main_background {
+    height: 600px;
+    background-image: url(https://static.wixstatic.com/media/74f558_66357e0ecfea4c86b2ea0bce6e8a9447~mv2.jpg/v1/fill/w_1500,h_757,fp_0.50_0.50,q_85,enc_avif,quality_auto/74f558_66357e0ecfea4c86b2ea0bce6e8a9447~mv2.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 40%;
+
+    @include desktop() {
+      height: 860px;
+      background-attachment: fixed;
+    }
+
+    .overlay {
+      width: 100%;
+      height: 100%;
+      background-color: rgba(49, 49, 49, 0.521);
+      text-align: center;
+      @include flexbox(flex, center, center, column);
+      gap: 15px;
+
+      @include desktop() {
+        align-items: start;
+        padding-left: 50px;
+        gap: 100px;
+      }
+      h2 {
+        color: white;
+        max-width: 220px;
+        font-size: 28px;
+
+        @include desktop() {
+          font-size: 72px;
+          max-width: 700px;
+          text-align: start;
+        }
+      }
+
+      button {
+        @include button(white);
+      }
+    }
+  }
+}
